@@ -7,7 +7,9 @@ from .models import UserModel
 # Create your views here.
 def index(request):
 
-    # if(request.method == "POST"):
+    if(request.method == "POST"):
+        print(request.POST)
+        UserModel.objects.create(username = request.POST["username"], password = request.POST["password"], age = request.POST["age"])
 
     allEntries = UserModel.objects.all()
     form = UserForm()
