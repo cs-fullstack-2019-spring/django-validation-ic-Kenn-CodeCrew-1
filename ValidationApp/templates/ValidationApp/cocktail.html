@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{{ errors }}
+
+{% for eachEntry in allEntries %}
+<p>{{ eachEntry.name }}</p>
+{% endfor %}
+
+<form action="{% url 'cocktail' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Submit</button>
+</form>
+
+</body>
+</html>

@@ -8,3 +8,9 @@ class UserModel(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class CocktailModel(models.Model):
+    name = models.CharField(max_length=500, default="")
+    alcoholContent = models.DecimalField(decimal_places=3, max_digits=6, default=0.0)
+    servingContainer = models.CharField(max_length=50, default="")
