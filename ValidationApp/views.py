@@ -8,8 +8,20 @@ from .models import UserModel
 def index(request):
 
     if(request.method == "POST"):
-        print(request.POST)
-        UserModel.objects.create(username = request.POST["username"], password = request.POST["password"], age = request.POST["age"])
+        form = UserForm(request.POST)
+
+        # If your form has clean data, create a new entry
+        if(form.is_valid()):
+            UserModel.objects.create(username = request.POST["username"], password = request.POST["password"], age = request.POST["age"])
+        else:
+            print(form.errors)
+            allEntries = UserModel.objects.all()
+            context = {
+                "someErrors": form.errors,
+                "allEntries": allEntries,
+                'form': UserForm(),
+            }
+            return render(request, "ValidationApp/index.html", context)
 
     allEntries = UserModel.objects.all()
     form = UserForm()
