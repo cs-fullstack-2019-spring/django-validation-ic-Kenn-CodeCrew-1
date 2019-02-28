@@ -14,3 +14,11 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("Please don't use poop...")
 
         return usernameData
+
+    def clean_age(self):
+        ageData = self.cleaned_data["age"]
+
+        if ageData < 13:
+            raise forms.ValidationError("Go back to Barney!!!!")
+
+        return ageData
